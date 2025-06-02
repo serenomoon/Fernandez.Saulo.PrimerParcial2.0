@@ -12,9 +12,9 @@ def main() -> None:
     opcion_validada = False
     usuario_temp = ""
     usuario_logueado = False
-    cantidad_turnos_consulta = [0 for _ in range(len(datos_profesionales))]
-    cantidad_turnos_vacunacion = [0 for _ in range(len(datos_profesionales))]
-    cantidad_turnos_quirurgico = [0 for _ in range(len(datos_profesionales))]
+    turnos = [[0] * len(datos_servicios) for _ in range(len(datos_profesionales))]
+    if datos_turnos:
+        turnos = datos_turnos
     system("cls")
     while menu_abierto:
         print(Fore.GREEN +"Bienvenido a Clinica Veterinaria 'El Rope'"+ Style.RESET_ALL)
@@ -41,27 +41,16 @@ def main() -> None:
                             print(f"Profesional: {nuevo_turno[1]}")
                             print(f"Servicio: {nuevo_turno[2]}")
                             print(f"Precio: ${nuevo_turno[3]}")
-                            for i in range(len(datos_servicios)):
-                                if nuevo_turno[2] == palabra_normalizada(datos_servicios[i]):
-                                    if i == 0:
-                                        cantidad_turnos_consulta = añadir_turno(cantidad_turnos_consulta, cantidad_turnos_vacunacion, cantidad_turnos_quirurgico, datos_profesionales, datos_servicios, nuevo_turno[1], nuevo_turno[2])
-                                    elif i == 1:
-                                        cantidad_turnos_vacunacion = añadir_turno(cantidad_turnos_consulta, cantidad_turnos_vacunacion, cantidad_turnos_quirurgico, datos_profesionales, datos_servicios, nuevo_turno[1], nuevo_turno[2])
-                                    elif i == 2:
-                                        cantidad_turnos_quirurgico = añadir_turno(cantidad_turnos_consulta, cantidad_turnos_vacunacion, cantidad_turnos_quirurgico, datos_profesionales, datos_servicios, nuevo_turno[1], nuevo_turno[2])
-                                    break
+                            turnos = añadir_turno(turnos, datos_profesionales, datos_servicios,nuevo_turno[1],nuevo_turno[2])
                     else:
                         system("cls")
                         print("Debe loguearse para usar el servicio.")
                 case "3":
                     system("cls")
-                    turnos_totales = 0
-                    for i in range(len(datos_profesionales)):
-                        turnos_totales += cantidad_turnos_consulta[i] + cantidad_turnos_vacunacion[i] + cantidad_turnos_quirurgico[i]
-                    opcion_3(turnos_totales)
+                    opcion_3(turnos)
                 case "4":
                     system("cls")
-                    opcion_4(cantidad_turnos_consulta, cantidad_turnos_vacunacion, cantidad_turnos_quirurgico)
+                    opcion_4(turnos)
                 case "5":
                     menu_abierto = opcion_5()
             system("pause")

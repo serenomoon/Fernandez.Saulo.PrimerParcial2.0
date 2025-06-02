@@ -45,15 +45,17 @@ def opcion_3(turnos: list) -> None:
          print(Fore.YELLOW +f"{palabra_normalizada(datos_servicios[i]):<29}", end="")
          print(f"${datos_precios[i]:<10}")
     print(Fore.GREEN +f"{"\nTURNOS RESERVADOS":<30}", end=""+ Style.RESET_ALL)
-    print(Fore.YELLOW +f"{turnos}\n")
+    print(Fore.YELLOW +f"{total_turnos(turnos)}\n")
+    lista_turnos_veterinarios(datos_profesionales, turnos)
     
 
-def opcion_4(consulta:list , vacunacion: list, quirurgico: list):
+def opcion_4(turnos: list):
     submenu = True
     while submenu:
         system("cls")
         print(Fore.GREEN +"CONSULTAS"+ Style.RESET_ALL)
-        opcion_consulta = input(Fore.YELLOW +"1- Listado con la cantidad total de turnos reservados por cada veterinario\n" \
+        opcion_consulta = input(Fore.YELLOW +
+        "1- Listado con la cantidad total de turnos reservados por cada veterinario\n" \
         "2- Promedio de turnos por tipo de servicio entre todos los veterinarios\n" \
         "3- Recaudación total acumulada por todos los veterinarios\n" \
         "4- Veterinarios ordenados alfabéticamente de la A-Z junto al total que recaudó en concepto de servicios\n" \
@@ -71,34 +73,34 @@ def opcion_4(consulta:list , vacunacion: list, quirurgico: list):
             system("cls")
             match opcion_consulta:
                 case "1":
-                    turnos_totales_por_veterinario(datos_profesionales, consulta, vacunacion, quirurgico)
+                    turnos_totales_por_veterinario(datos_profesionales, turnos)
                     system("pause")
                 case "2":
-                    promedio_turnos_entre_veterinarios(datos_profesionales, consulta, vacunacion, quirurgico)
+                    promedio_turnos_por_servicio(datos_servicios, turnos)
                     system("pause")
                 case "3":
-                    recaudacion_total(datos_precios, consulta, vacunacion, quirurgico)
+                    recaudacion_total(datos_precios, turnos)
                     system("pause")
                 case "4":
-                    recaudacion_por_servicio(datos_profesionales, datos_precios, consulta, vacunacion, quirurgico)
+                    recaudacion_por_servicio(datos_profesionales, datos_precios, turnos)
                     system("pause")
                 case "5":
-                    porcentaje_por_servicio(datos_servicios, consulta, vacunacion, quirurgico)
+                    porcentaje_por_servicio(datos_servicios, turnos)
                     system("pause")
                 case "6":
-                    profesional_menos_turnos(datos_profesionales, consulta, vacunacion, quirurgico)
+                    profesional_menos_turnos(datos_profesionales, turnos)
                     system("pause")
                 case "7":
-                    porcentaje_turnos_por_profesional(datos_profesionales, consulta, vacunacion, quirurgico)
+                    porcentaje_turnos_por_profesional(datos_profesionales, turnos)
                     system("pause")
                 case "8":
-                    servicio_mas_solicitado(datos_profesionales, datos_servicios, consulta, vacunacion, quirurgico)
+                    servicio_mas_solicitado(datos_profesionales, datos_servicios, turnos)
                     system("pause")
                 case "9":
-                    servicio_mas_recaudado(datos_servicios, datos_precios, consulta, vacunacion, quirurgico)
+                    servicio_mas_recaudado(datos_servicios, datos_precios, turnos)
                     system("pause")
                 case "10":
-                    porcentaje_turnos_alfabeticamente(datos_profesionales, consulta, vacunacion, quirurgico)
+                    porcentaje_turnos_alfabeticamente(datos_profesionales, turnos)
                     system("pause")
                 case "11":
                     print("Volviendo al Menu...")
